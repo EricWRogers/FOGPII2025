@@ -27,6 +27,7 @@ public class WeaponManager : MonoBehaviour
 {
     public List<Weapon> weapons;
     public Weapon currentWeapon;
+    public Transform firePoint;
     private int weaponIndex = 0;
 
     public void Use()
