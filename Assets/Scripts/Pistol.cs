@@ -2,9 +2,16 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
-    public override void Use()
+    public GameObject projectile;
+
+    void Awake()
     {
-        Debug.Log("Player shot 9mm!!");
+        if (!projectile)
+            Debug.LogError("GameObject: " + gameObject.name + " variable projectile is not assigned.");
+    }
+    public override void Use(Transform _firePoint)
+    {
+        Instantiate(projectile, _firePoint.position, _firePoint.rotation);
     }
 
     public void Equiped()
