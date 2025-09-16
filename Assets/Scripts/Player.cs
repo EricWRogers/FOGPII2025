@@ -1,12 +1,19 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : Tank
 {
     public Transform turret;
+    public float speed = 10.0f;
+
+    Rigidbody2D rigidbody;
+
     void Start()
     {
         GameManager.instance.player = this;
+
+        rigidbody = GetComponent<Rigidbody2D>();
 
         if (!turret)
             Debug.LogError("GameObject: " + gameObject.name + " variable turret is not assigned.");
@@ -27,14 +34,14 @@ public class Player : Tank
             return;
 
         direction = Vector3.Normalize(direction);
-
-        turret.transform.eulerAngles = new Vector3(0.0f, 0.0f, Mathf.Atan2(direction.z, direction.x) * Mathf.Rad2Deg);
-
-        //Debug.Log("Dir Right: " + turret.transform.right);
+        
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        
+        turret.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     void UpdateMovement()
     {
-
+        rigidbody.linearVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * speed;
     }
 }
