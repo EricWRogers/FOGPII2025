@@ -6,6 +6,7 @@ public class Player : Tank
 {
     public Transform turret;
     public float speed = 10.0f;
+    public float turningSpeed = 180.0f;
 
     Rigidbody2D rigidbody;
 
@@ -42,6 +43,16 @@ public class Player : Tank
 
     void UpdateMovement()
     {
-        rigidbody.linearVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * speed;
+        //rigidbody.linearVelocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * speed;
+
+        rigidbody.MoveRotation(transform.eulerAngles.z + -Input.GetAxisRaw("Horizontal") * turningSpeed * Time.deltaTime);
+
+        Vector2 targetPosition =    transform.position +
+                                    transform.right *
+                                    Input.GetAxisRaw("Vertical") *
+                                    speed *
+                                    Time.deltaTime;
+
+        rigidbody.MovePosition(targetPosition);
     }
 }
