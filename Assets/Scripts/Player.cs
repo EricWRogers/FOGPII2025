@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : Tank
 {
     public Transform turret;
+    public WeaponManager weaponManager;
     public float speed = 10.0f;
     public float turningSpeed = 180.0f;
 
@@ -18,6 +19,9 @@ public class Player : Tank
 
         if (!turret)
             Debug.LogError("GameObject: " + gameObject.name + " variable turret is not assigned.");
+
+        if (!weaponManager)
+            Debug.LogError("GameObject: " + gameObject.name + " variable weaponManager is not assigned.");
     }
 
     // Update is called once per frame
