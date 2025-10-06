@@ -51,9 +51,6 @@ public class WeaponManager : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-            Use();
-
         if (Input.mouseScrollDelta.y > 0.0f)
             NextWeapon();
 
